@@ -29,7 +29,7 @@
   <xsl:include href="../common2/functions.xsl"/> 
 
   <xsl:template match="/">
-    <article dtd-version="3.0" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <standard dtd-version="3.0" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
       <xsl:if test="TEI/@xml:lang">
         <xsl:copy-of select="TEI/@xml:lang"></xsl:copy-of>
       </xsl:if>
@@ -147,7 +147,7 @@
 
         <!-- Here we dig through the teiHeader to extract what we need to create journal metadata
      and article metadata. First, journal metadata: -->
-        <xsl:element name="journal-meta">
+        <!--<xsl:element name="journal-meta">
           <journal-id journal-id-type="publisher">
           <xsl:choose>
           <xsl:when test="TEI/teiHeader[1]/fileDesc[1]/publicationStmt[1]/publisher[1]/choice[1]/abbr[1]">
@@ -179,15 +179,13 @@
             </publisher-name>
           </publisher>
 
-        </xsl:element>
+        </xsl:element>-->
 
         <!--        Next, article metadata. -->
-        
-        <xsl:element name="article-meta">
+      
+        <!-- <xsl:element name="article-meta">
           
-          <!-- OK, so the way OxGarage handled this was flawed, it used to use the id attribute on the TEI element
-          this doesn't allow, though, for multiple IDs, or to specify the type, which we might want. SO, I've
-          introduced a technically non-compliant additional TEI/teiHeader/articleID/id element. -->
+        
           <xsl:for-each select="TEI/teiHeader/articleIDs/*">
             
             <xsl:element name="article-id">
@@ -234,21 +232,18 @@
           
           <elocation-id><xsl:value-of select="TEI/teiHeader[1]/fileDesc[1]/publicationStmt[1]/idno[@type='itemNo']/@n" /></elocation-id>
 
-<!-- If there is an abstract, copy it in here for the sake of completeness. -->
+
           <xsl:if test="TEI/text/body/div[@type='abstract']">
             <abstract>
               <xsl:apply-templates select="TEI/text/body/div[@type='abstract']/*" />
             </abstract>
           </xsl:if>
-
-<!--        Right now, profilDesc only contains keywords, but other templates 
-            might be added later. -->
         <xsl:apply-templates select="TEI/teiHeader/profileDesc"></xsl:apply-templates>
 
 
 
         </xsl:element>
-
+      -->
       </xsl:element>
 
       <!--Here's the meat of the document. -->
@@ -314,7 +309,7 @@
           </xsl:element>
         </xsl:if>
       </xsl:element>
-    </article>
+    </standard>
 
   </xsl:template>
   
